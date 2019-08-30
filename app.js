@@ -1,6 +1,6 @@
 const chalk = require('chalk')
 const yargs = require('yargs')
-const getNotes = require('./notes')
+const notes = require('./notes')
 
 //Create add command
 yargs.command({
@@ -19,8 +19,7 @@ yargs.command({
         }
     },
     handler: (argv) => {
-        console.log(`Title: ${argv.title}`)
-        console.log(`Body: ${argv.body}`)
+        notes.addNote(argv.title, argv.body)
     }
 })
 
@@ -28,7 +27,7 @@ yargs.command({
 yargs.command({
     command: 'remove',
     describe: 'Remove a note',
-    builder:{
+    builder: {
         title: {
             describe: 'Note title',
             demandOption: true,
@@ -36,7 +35,7 @@ yargs.command({
         }
     },
     handler: (argv) => {
-        
+        notes.removeNote(argv.title)
     }
 })
 
@@ -45,7 +44,7 @@ yargs.command({
     command: 'list',
     describe: 'List your notes',
     handler: () => {
-        console.log('Listing out all note')
+        notes.listNotes()
     }
 })
 
@@ -53,15 +52,15 @@ yargs.command({
 yargs.command({
     command: 'read',
     describe: "Read a note",
-    builder:{
-        title:{
+    builder: {
+        title: {
             describe: 'Note title',
             demandOption: true,
             type: 'string'
         }
     },
     handler: (argv) => {
-        console.log('Reading a note')
+        notes.readNote(argv.title)
     }
 })
 
