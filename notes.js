@@ -18,7 +18,7 @@ const addNote = (title, body) => {
         saveNotes(notes)
         console.log(chalk.green.inverse('New note added!'))
     } else {
-        console.log(chalk.red.inverse('No title taken!'))
+        console.log(chalk.red.inverse('Please add a note with a different title!'))
     }
 }
 
@@ -28,6 +28,7 @@ const listNotes = () => {
         console.log(chalk.red.bold.inverse('You have no notes!'))
     } else {
         console.log(chalk.blue.inverse('Your notes...'))
+        console.log(chalk.bold('------------------'))
         notes.forEach(note => {
             console.log(chalk.green(note.title))
         })
@@ -40,8 +41,9 @@ const readNote = (title) => {
     const note = notes.find((note) => note.title === title)
 
     if (note) {
-        console.log(chalk.inverse(`Title: ${note.title}`))
-        console.log(`Body: ${note.body}`)
+        console.log(chalk.bold(('------------------')))
+        console.log(chalk`{bold Title: } ${note.title}`)
+        console.log(chalk`{bold Body: } ${note.body}`)
     } else {
         console.log(chalk.red.inverse('Note not found!'))
     }
